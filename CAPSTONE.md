@@ -1,20 +1,3 @@
-# STEPS TO TAKE
-
-- start off with adapting printw_example
-
-instructions for running the project
-
-an overview of your code structure
-
-an explanation of how your submission satisfies the necessary rubric
-https://review.udacity.com/#!/rubrics/2533/view
-
-# RESOURCES
-
-- http://www.tldp.org/HOWTO/NCURSES-Programming-HOWTO/intro.html#WHERETOGETIT
-
-# CAPSTONE OUTLINE STEPS
-
 Step 1: Propose a Project
 Identify the application you want to build. We recommend keeping the functionality as simple as possible to start with. Note that it is fine to reuse code from any of the courses in the Nanodegree as a starting point. You are also welcome to use the Snake game sample code to extend with additional features or to build an entirely different game. If you prefer to start from scratch, you can find a starter repo here.
 

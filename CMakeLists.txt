@@ -1,10 +1,15 @@
-cmake_minimum_required(VERSION 3.7)
+cmake_minimum_required(VERSION 2.6)
+project(elevator)
 
-add_definitions(-std=c++17)
+find_package(Curses REQUIRED)
+include_directories(${CURSES_INCLUDE_DIRS})
 
-set(CXX_FLAGS "-Wall")
-set(CMAKE_CXX_FLAGS, "${CXX_FLAGS}")
+include_directories(include)
+file(GLOB SOURCES "src/*.cpp")
 
-project(HelloWorld)
+add_executable(elevator ${SOURCES})
 
-add_executable(HelloWorld src/main.cpp)
+set_property(TARGET elevator PROPERTY CXX_STANDARD 17)
+target_link_libraries(elevator ${CURSES_LIBRARIES})
+# TODO: Run -Werror in CI.
+target_compile_options(elevator PRIVATE -Wall -Wextra)
