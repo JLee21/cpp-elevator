@@ -1,7 +1,9 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 
-enum ElevStatus
+#include <stdio.h>
+
+enum ElevState
 {
     ready,
     busy,   // the times between ready/moving and moving/ready
@@ -14,29 +16,47 @@ class Elevator
 public:
     // constructor / desctructor
     Elevator(){
-        _status = ElevStatus::ready;
+        _state = ElevState::ready;
+        _speed = 2; // m/s
+        _currFloor = 1;
+        _targetFloor = 1;
+        _currZ = 0.0;
     };
 
     // getters / setters
-    void setCurrentState();
-    void getCurrentState();
+    
+    ElevState getState() {return _state;};
 
     // typical behaviour methods
     void operate();
     void simulate();
+    double getZFromFloor(int floorNum);
+    void printStatus(){
+        // TODO: thread this print statement
+        printf("*****************************\n");
+        printf ("Current State:\t%d \n", _state);
+        printf ("Current Z:\t%0.1f \n", _currZ);
+        printf ("Current Floor:\t%d \n", _currFloor);
+        printf ("Target Floor:\t%d \n", _targetFloor);
+        printf ("Current Speed:\t%0.1f \n", _speed);
+        printf("*****************************\n\n");
+    }
 
     // miscellaneous
     // std::shared_ptr<Elevator> get_shared_this() { return shared_from_this(); }
 
 private:
-    // typical behaviour methods
+    ElevState _state;
+    double _currZ; // elevation of ego
+    int _currFloor; // the floor ego is at during a stop
+    int _targetFloor; // the floor the ego needs to get to
+    double _speed; // ego speed in m/s
+    void move();
+    void setTargetFloor(int floorNum);
+    void setCurrFloor(int floorNum) { _currFloor = floorNum; }
+    void setCurrZ(int _z) { _currZ = _z; }
+    void setState(ElevState state) { _state = state; }
 
-
-    // std::shared_ptr<> _currFloor;            // street on which the vehicle is currently on
-    // std::shared_ptr<Intersection> _currDest; // destination to which the vehicle is currently driving
-    double _elev;                            // elevation of ego
-    double _speed;                           // ego speed in m/s
-    ElevStatus _status;
 };
 
 #endif
